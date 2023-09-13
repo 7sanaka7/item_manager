@@ -31,7 +31,8 @@ public class ItemController {
 	public String index(Model model) {
 		
 		List<Item> items = this.itemService.findAll();
-		System.out.println(items.toString());
+		model.addAttribute("items",items);
+		
 		return "item/index";
 	}
 	
@@ -42,26 +43,36 @@ public class ItemController {
 	
 	//syouhin touroku page
 	@PostMapping("toroku")
-	public String toroku(ItemForm itemform) {
+	public String toroku(ItemForm itemForm) {
+		this.itemService.save(itemForm); 
 		return "redirect:/item";
 	}
 	
 	@GetMapping("henshu/{id}")
 	public String hensyuPage(@PathVariable("id") Integer id,Model model,
 								@ModelAttribute("itemForm") ItemForm itemForm) {
+		//Entityクラスのインスタンスをidから検索し取得
+		Item item = this.itemService.findById(id);
+		//フィールドセット
+		itemForm.setName(item.getName());
+		itemForm.setPrice(item.getPrice());
+		//idセット
+		model.addAttribute("id",id);
 		return "item/henshuPage";
 	}
 	
 	//syouhinn hensyu page
 	@PostMapping("henshu/{id}")
-	public String henshu(@PathVariable("id") Integer id, @ModelAttribute("itemForm") ItemForm itemform) {
-	return "redirect:/item";
+	public String henshu(@PathVariable("id") Integer id, @ModelAttribute("itemForm") ItemForm itemForm) {
+		this.itemService.update(id, itemForm);	
+		return "redirect:/item";
 	
 	}
 
 	//syouhinn sakujo
 	@PostMapping("sakujo/{id}")
-	public String sakujo(@PathVariable("id") Integerid) {
+	public String sakujo(@PathVariable("id") Integer id) {
+		this.itemService.delete(id);
 		return "redirect:/item";
 	}
 	
