@@ -30,25 +30,39 @@ public class ItemController {
 	@GetMapping
 	public String index(Model model) {
 		
-		List<Item> item = this.itemService.findAll();
+		List<Item> items = this.itemService.findAll();
 		System.out.println(items.toString());
 		return "item/index";
 	}
 	
-	//syouhin touroku page
 	@GetMapping("toroku")
+	public String torokuPage(@ModelAttribute("itemForm") ItemForm itemForm) {
+		return "item/torokuPage";
+	}
+	
+	//syouhin touroku page
+	@PostMapping("toroku")
 	public String toroku(ItemForm itemform) {
 		return "redirect:/item";
 	}
 	
-	//syouhinn hensyu page
 	@GetMapping("henshu/{id}")
+	public String hensyuPage(@PathVariable("id") Integer id,Model model,
+								@ModelAttribute("itemForm") ItemForm itemForm) {
+		return "item/henshuPage";
+	}
+	
+	//syouhinn hensyu page
+	@PostMapping("henshu/{id}")
 	public String henshu(@PathVariable("id") Integer id, @ModelAttribute("itemForm") ItemForm itemform) {
-	return "redirect:/item";	
+	return "redirect:/item";
+	
 	}
 
 	//syouhinn sakujo
-	public string sakujo(@PathVariable("id") Integerid) {
+	@PostMapping("sakujo/{id}")
+	public String sakujo(@PathVariable("id") Integerid) {
 		return "redirect:/item";
 	}
+	
 }
