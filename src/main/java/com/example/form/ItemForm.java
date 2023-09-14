@@ -5,6 +5,7 @@ public class ItemForm {
 	 private String name;
 
 	    private Integer price;
+	    private Integer categoryId;
 
 
 	    public String getName() {
@@ -20,4 +21,11 @@ public class ItemForm {
 	        this.price = price;
 	    }
 	    
+	    public Integer getCategoryId() {
+	    	return this.categoryId;
+	    }
+	    
+	    public void setcategoryId(Integer categoryId) {
+	    	this.categoryId = categoryId;
+	    }
 }
