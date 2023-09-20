@@ -26,7 +26,7 @@ public class Item {
 (name = "NAME")
 	private String name;
 	
-	@Column(name ="PLICE")
+	@Column(name ="PRICE")
 	private Integer price;
 	
 	

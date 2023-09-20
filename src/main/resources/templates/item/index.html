@@ -28,6 +28,11 @@
 					<td th:text="${item.category.name}"></td>
 					<td>
 						<form th:action="@{/item/henshu/{id}(id=${item.id})}" method="get">
+							<input type="submit" value="編集">
+						</form>
+					</td>
+					<td>
+						<form th:action="@{/item/sakujo/{id}(id=${item.id})}" method="post">
 							<input type="submit" value="削除">
 						</form>
 					</td>
