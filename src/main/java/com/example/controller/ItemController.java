@@ -54,14 +54,14 @@ public class ItemController {
 	
 	//syouhinn hensyu page
 	@PostMapping("henshu/{id}")
-	public String henshu(@PathVariable("id") Integer id, @ModelAttribute("itemForm") ItemForm itemform) {
+	public String henshu(@PathVariable("id") Integer id, @ModelAttribute("itemForm") ItemForm itemForm) {
 	return "redirect:/item";
 	
 	}
 
 	//syouhinn sakujo
 	@PostMapping("sakujo/{id}")
-	public String sakujo(@PathVariable("id") Integerid) {
+	public String sakujo(@PathVariable("id") Integer id) {
 		return "redirect:/item";
 	}
 	
