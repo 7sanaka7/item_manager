@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.example.Entity.Category;
 import com.example.Entity.Item;
 import com.example.form.ItemForm;
+import com.example.service.CategoryService;
 import com.example.service.ItemService;
 
 @Controller
@@ -20,11 +22,15 @@ import com.example.service.ItemService;
 public class ItemController {
 	
 	private final ItemService itemService;
+	//CategoryServiceをコンストラクタインジェクションする
+		private final CategoryService categoryService;
+		
+		@Autowired
+		public ItemController(ItemService itemService, CategoryService categoryService) {
+			this.itemService = itemService;
+			this.categoryService = categoryService; //追加
+		}
 	
-	@Autowired
-	public ItemController(ItemService itemservice) {
-		this.itemService = itemservice;
-	}
 	
 	//syouhinn
 	@GetMapping
@@ -37,7 +43,12 @@ public class ItemController {
 	}
 	
 	@GetMapping("toroku")
-	public String torokuPage(@ModelAttribute("itemForm") ItemForm itemForm) {
+	public String torokuPage(@ModelAttribute("itemForm") ItemForm itemForm, Model model) {
+		//Categoryモデルから一覧を取得する
+		List<Category> categories = this.categoryService.findAll();
+		
+		//viewにカテゴリを渡す
+		model.addAttribute("categories", categories);
 		return "item/torokuPage";
 	}
 	
@@ -56,8 +67,16 @@ public class ItemController {
 		//フィールドセット
 		itemForm.setName(item.getName());
 		itemForm.setPrice(item.getPrice());
+		//カテゴリIDformセット
+		itemForm.setcategoryId(item.getCategoryId());
+		
+		//Categoryモデルから一覧取得
+		List<Category> categories = this.categoryService.findAll();
 		//idセット
 		model.addAttribute("id",id);
+		
+		//viweにカテゴリをわたす
+		model.addAttribute("categories",categories);
 		return "item/henshuPage";
 	}
 	
@@ -75,5 +94,7 @@ public class ItemController {
 		this.itemService.delete(id);
 		return "redirect:/item";
 	}
+	
+	
 	
 }

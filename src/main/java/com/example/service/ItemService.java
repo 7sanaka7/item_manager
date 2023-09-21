@@ -31,6 +31,8 @@ public class ItemService {
 		//フィールドセット
 		item.setName(itemForm.getName());
 		item.setPrice(itemForm.getPrice());
+		//カテゴリIDをセット
+		item.setCategoryId(itemForm.getCategoryId());
 		//repository.savaメソッドを利用してデータの保存
 		return this.itemRepository.save(item);
 		
@@ -49,6 +51,8 @@ public class ItemService {
 		//Formクラスのフィールドセット
 		item.setName(itemForm.getName());
 		item.setPrice(itemForm.getPrice());
+		//カテゴリIDをセット
+		item.setCategoryId(itemForm.getCategoryId());
 		//repository.saveメソッドを利用してデータの保存
 		return this.itemRepository.save(item);
 	}
@@ -68,4 +72,6 @@ public class ItemService {
 	}
 	
 	
-}
+		
+	}
+	
