@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
 :root{
-    --header-color: #dadada;
+    --header-color: #DADADA;
     --menu-color: #204969;
 }
 
@@ -46,7 +46,7 @@ body{
 .menu-list a{
     color: white;
     font-size: 18px;
-    padding: 0 10px;
+    text-decoration: none;
 }
 
 .menu-list li{
